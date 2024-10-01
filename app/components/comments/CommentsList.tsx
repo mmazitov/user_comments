@@ -13,17 +13,17 @@ import {
 	setComments,
 } from '@/store/commentsStore';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 
-// CommentList.tsx
 import { Button } from '@/components/ui/button';
 import { FaCommentSlash } from 'react-icons/fa6';
 import { RootState } from '@/store/index';
 import { fetchComments } from '../../api/comments/comments';
-import { setScrollPosition } from '@/store/scrollStore';
+import { useEffect } from 'react';
 
 const CommentList = () => {
 	const dispatch = useDispatch();
+
+	// Select comments and filter user from the Redux store
 	const comments = useSelector((state: RootState) => state.comments.comments);
 	const filteredUser = useSelector(
 		(state: RootState) => state.comments.filteredUser
@@ -33,66 +33,69 @@ const CommentList = () => {
 		(state: RootState) => state.scroll.scrollPosition
 	);
 
-	// Загрузка комментариев из localStorage на клиенте
+	// Load comments from localStorage or fetch from API on component mount
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			const savedComments = localStorage.getItem('comments');
 			if (savedComments) {
-				dispatch(setComments(JSON.parse(savedComments)));
+				dispatch(setComments(JSON.parse(savedComments))); // Set comments from localStorage
 			} else {
 				const loadComments = async () => {
-					const fetchedComments = await fetchComments();
-					dispatch(setComments(fetchedComments));
-					localStorage.setItem('comments', JSON.stringify(fetchedComments));
+					const fetchedComments = await fetchComments(); // Fetch comments from API
+					dispatch(setComments(fetchedComments)); // Set comments in the Redux store
+					localStorage.setItem('comments', JSON.stringify(fetchedComments)); // Save to localStorage
 				};
 				loadComments();
 			}
 		}
 	}, [dispatch]);
 
-	// Загрузка выбранного пользователя для фильтрации из localStorage
+	// Load filtered user from localStorage on component mount
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
 			const savedUser = localStorage.getItem('filteredUser');
 			if (savedUser) {
-				dispatch(filterCommentsByUser(savedUser)); // Убедитесь, что savedUser существует
+				dispatch(filterCommentsByUser(savedUser)); // Set filtered user if exists
 			}
 		}
 	}, [dispatch]);
 
+	// Scroll to the last saved position when comments are updated
 	useEffect(() => {
 		if (comments.length > 0) {
-			window.scrollTo(0, scrollPosition);
+			window.scrollTo(0, scrollPosition); // Scroll to the saved position
 		}
 	}, [comments, scrollPosition]);
 
+	// Handle deleting a comment and update localStorage
 	const handleDelete = (commentId: number) => {
-		dispatch(deleteComment(commentId));
+		dispatch(deleteComment(commentId)); // Dispatch delete comment action
 		if (typeof window !== 'undefined') {
 			const updatedComments = comments.filter(
-				(comment) => comment.id !== commentId
+				(comment) => comment.id !== commentId // Filter out the deleted comment
 			);
-			localStorage.setItem('comments', JSON.stringify(updatedComments));
+			localStorage.setItem('comments', JSON.stringify(updatedComments)); // Update localStorage
 		}
 	};
 
+	// Handle liking a comment and update localStorage
 	const handleLike = (commentId: number) => {
-		dispatch(incrementLikes(commentId));
+		dispatch(incrementLikes(commentId)); // Dispatch increment likes action
 		if (typeof window !== 'undefined') {
 			localStorage.setItem(
 				'comments',
 				JSON.stringify(
 					comments.map((comment) =>
 						comment.id === commentId
-							? { ...comment, likes: comment.likes + 1 }
+							? { ...comment, likes: comment.likes + 1 } // Increment likes
 							: comment
 					)
 				)
-			);
+			); // Update localStorage
 		}
 	};
 
-	// Фильтрация комментариев по имени пользователя или никнейму
+	// Filter comments based on the selected user or search input
 	const filteredComments = filteredUser
 		? comments.filter(
 				(comment) =>
@@ -107,17 +110,19 @@ const CommentList = () => {
 		  )
 		: comments;
 
+	// Handle user click to filter comments by the selected user
 	const handleUserClick = (user: string) => {
-		dispatch(filterCommentsByUser(user)); // Устанавливаем выбранного пользователя для фильтрации
+		dispatch(filterCommentsByUser(user)); // Set the selected user for filtering
 		if (typeof window !== 'undefined') {
-			localStorage.setItem('filteredUser', user); // Сохраняем выбранного пользователя в localStorage
+			localStorage.setItem('filteredUser', user); // Save the selected user in localStorage
 		}
 	};
 
+	// Reset the comment filter
 	const handleResetFilter = () => {
-		dispatch(filterCommentsByUser('')); // Сбрасываем фильтр
+		dispatch(filterCommentsByUser('')); // Clear the filter
 		if (typeof window !== 'undefined') {
-			localStorage.removeItem('filteredUser'); // Удаляем сохраненный пользовательский фильтр из localStorage
+			localStorage.removeItem('filteredUser'); // Remove saved user filter from localStorage
 		}
 	};
 
@@ -139,7 +144,7 @@ const CommentList = () => {
 								}
 								className="hover:underline cursor-pointer"
 							>
-								{comment.user.username}
+								{comment.user.username} {/* Display username */}
 							</CardTitle>
 							<CardDescription
 								onClick={() =>
@@ -147,18 +152,19 @@ const CommentList = () => {
 								}
 								className="hover:underline cursor-pointer"
 							>
-								{comment.user.fullName}
+								{comment.user.fullName} {/* Display full name */}
 							</CardDescription>
 						</CardHeader>
-						<CardContent>{comment.body}</CardContent>
+						<CardContent>{comment.body}</CardContent> {/* Display comment body */}
 						<CardFooter className="flex justify-between">
 							<span
 								className="hover:underline cursor-pointer"
-								onClick={() => handleLike(comment.id)}
+								onClick={() => handleLike(comment.id)} // Handle like button click
 							>
-								Likes: {comment.likes}
+								Likes: {comment.likes} {/* Display likes count */}
 							</span>
 							<Button onClick={() => handleDelete(comment.id)}>
+								{/* Handle delete button click */}
 								<FaCommentSlash />
 							</Button>
 						</CardFooter>

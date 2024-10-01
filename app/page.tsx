@@ -1,19 +1,18 @@
-'use client';
+'use client'; // Indicates that this component is a client component in Next.js
 
-import CommentList from './components/comments/DynamicCommentList';
-import DynamicCommentList from './components/comments/DynamicCommentList';
-import FormAdd from './components/forms/FormAdd';
-import { Provider } from 'react-redux';
-import store from '@/store/index';
-import { useScrollManager } from '@/app/utils/scrollManager';
+import DynamicCommentList from './components/comments/DynamicCommentList'; // Importing DynamicCommentList component
+import FormAdd from './components/forms/FormAdd'; // Importing FormAdd component for adding comments
+import { Provider } from 'react-redux'; // Importing Provider from React Redux for state management
+import store from '@/store/index'; // Importing the Redux store
+import { useScrollManager } from '@/app/utils/scrollManager'; // Importing custom hook for managing scroll position
 
 const PageContent = () => {
-	useScrollManager(); // Теперь вызываем хук внутри компонента, находящегося под провайдером
+	useScrollManager(); // Calling the useScrollManager hook to manage scroll position within this component
 
 	return (
 		<>
-			<FormAdd />
-			<DynamicCommentList />
+			<FormAdd /> {/* Render the form for adding new comments */}
+			<DynamicCommentList /> {/* Render the dynamic comment list */}
 		</>
 	);
 };
@@ -21,11 +20,16 @@ const PageContent = () => {
 const page = () => {
 	return (
 		<div className="mx-auto pt-10 container">
+			{' '}
+			{/* Wrapper for centering content with padding */}
 			<Provider store={store}>
-				<PageContent /> {/* Вложенный компонент с вызовом useScrollManager */}
+				{' '}
+				{/* Provide the Redux store to the component tree */}
+				<PageContent />{' '}
+				{/* Render PageContent which includes FormAdd and DynamicCommentList */}
 			</Provider>
 		</div>
 	);
 };
 
-export default page;
+export default page; // Export the page component as the default export

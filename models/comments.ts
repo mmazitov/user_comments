@@ -1,4 +1,3 @@
-// models/Comment.ts
 export interface Comment {
   id: number;
   body?: string;
