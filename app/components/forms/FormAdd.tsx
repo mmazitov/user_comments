@@ -65,6 +65,7 @@ const FormAdd = () => {
 						name="inputAddOne" // Name attribute for the input
 						onChange={handleChange} // Set the change handler
 						value={inputAddOne} // Bind the input value to the state
+						required // Mark the input as required
 					/>
 				</div>
 				<div>
@@ -75,6 +76,7 @@ const FormAdd = () => {
 						name="inputAddTwo" // Name attribute for the input
 						onChange={handleChange} // Set the change handler
 						value={inputAddTwo} // Bind the input value to the state
+						required // Mark the input as required
 					/>
 				</div>
 				<div>
@@ -85,6 +87,7 @@ const FormAdd = () => {
 						name="textareaAdd" // Name attribute for the textarea
 						onChange={handleChange} // Set the change handler
 						value={textareaAdd} // Bind the textarea value to the state
+						required // Mark the textarea as required
 					/>
 				</div>
 				<Button type="submit">Add</Button> {/* Button to submit the form */}
