@@ -1,12 +1,14 @@
 import commentsReducer from '@/store/commentsStore'; // Редюсер для комментариев
 import { configureStore } from '@reduxjs/toolkit';
-import formReducer from '@/store/formStore'; // Редюсер для формы
+import formReducer from '@/store/formStore';
+import scrollReducer from '@/store/scrollStore';
 
 // Создаем хранилище
 const store = configureStore({
 	reducer: {
 		form: formReducer,
 		comments: commentsReducer,
+		scroll: scrollReducer,
 	},
 });
 

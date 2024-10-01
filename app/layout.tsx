@@ -1,10 +1,9 @@
 import './globals.css';
 
+import Comments from './pages/comments';
 import Header from './components/Header';
 import type { Metadata } from 'next';
-import { Provider } from 'react-redux';
 import localFont from 'next/font/local';
-import store from '../store/index';
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',

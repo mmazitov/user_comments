@@ -9,8 +9,11 @@ interface CommentsState {
 }
 
 const loadCommentsFromLocalStorage = (): Comment[] => {
-  const savedComments = localStorage.getItem('comments');
-  return savedComments ? JSON.parse(savedComments) : [];
+  if (typeof window !== 'undefined') {
+    const savedComments = localStorage.getItem('comments');
+    return savedComments ? JSON.parse(savedComments) : [];
+  }
+  return []; // Возвращаем пустой массив, если находимся на сервере
 };
 
 const initialState: CommentsState = {
@@ -24,17 +27,23 @@ const commentsSlice = createSlice({
   reducers: {
     setComments: (state, action: PayloadAction<Comment[]>) => {
       state.comments = action.payload;
-      localStorage.setItem('comments', JSON.stringify(state.comments)); // Сохраняем в localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('comments', JSON.stringify(state.comments));
+      } // Сохраняем в localStorage
     },
     deleteComment: (state, action: PayloadAction<number>) => {
       state.comments = state.comments.filter((comment) => comment.id !== action.payload);
-      localStorage.setItem('comments', JSON.stringify(state.comments)); // Обновляем в localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('comments', JSON.stringify(state.comments));
+      } // Обновляем в localStorage
     },
     incrementLikes: (state, action: PayloadAction<number>) => {
       const comment = state.comments.find((comment) => comment.id === action.payload);
       if (comment) {
         comment.likes += 1;
-        localStorage.setItem('comments', JSON.stringify(state.comments)); // Обновляем в localStorage
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('comments', JSON.stringify(state.comments));
+        } // Обновляем в localStorage
       }
     },
     filterCommentsByUser: (state, action: PayloadAction<string | null>) => {
@@ -42,7 +51,9 @@ const commentsSlice = createSlice({
     },
     addComment: (state, action: PayloadAction<Comment>) => {
       state.comments.unshift(action.payload);
-      localStorage.setItem('comments', JSON.stringify(state.comments)); // Сохраняем в localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('comments', JSON.stringify(state.comments));
+      } // Сохраняем в localStorage
     },
   },
 });

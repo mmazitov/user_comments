@@ -19,7 +19,8 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { FaCommentSlash } from 'react-icons/fa6';
 import { RootState } from '@/store/index';
-import { fetchComments } from '../api/comments/comments';
+import { fetchComments } from '../../api/comments/comments';
+import { setScrollPosition } from '@/store/scrollStore';
 
 const CommentList = () => {
 	const dispatch = useDispatch();
@@ -28,6 +29,9 @@ const CommentList = () => {
 		(state: RootState) => state.comments.filteredUser
 	);
 	const { inputSearch } = useSelector((state: RootState) => state.form.values);
+	const scrollPosition = useSelector(
+		(state: RootState) => state.scroll.scrollPosition
+	);
 
 	// Загрузка комментариев из localStorage на клиенте
 	useEffect(() => {
@@ -55,6 +59,12 @@ const CommentList = () => {
 			}
 		}
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (comments.length > 0) {
+			window.scrollTo(0, scrollPosition);
+		}
+	}, [comments, scrollPosition]);
 
 	const handleDelete = (commentId: number) => {
 		dispatch(deleteComment(commentId));
