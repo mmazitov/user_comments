@@ -45,9 +45,15 @@ const formSlice = createSlice({
 				localStorage.setItem(`form${field.charAt(0).toUpperCase() + field.slice(1)}`, value); // Update localStorage with the new value
 			}
 		},
+		resetInputSearch: (state) => {
+			state.values.inputSearch = ''; // Reset inputSearch to an empty string
+			if (typeof window !== 'undefined') {
+				localStorage.setItem('formInputSearch', ''); // Also reset in localStorage
+			}
+		},
 	},
 });
 
 // Export actions and reducer
-export const { setInputValue } = formSlice.actions; // Exporting the setInputValue action for use in components
+export const { setInputValue, resetInputSearch } = formSlice.actions; // Exporting the setInputValue action for use in components
 export default formSlice.reducer; // Exporting the reducer to be used in the store
