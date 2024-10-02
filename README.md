@@ -12,6 +12,7 @@
 ## :dart: About
 
 <p>This is a comments management application built with React and Redux, designed to facilitate the addition, deletion, and filtering of comments. The application maintains the state of comments and form inputs using Redux Toolkit, and persists data in localStorage to ensure user data is retained across sessions.</p>
+
 ## :sparkles: Features
 
 :heavy_check_mark: <strong>Add Comments: </strong>Users can submit new comments, which are added to the list and displayed in real time.<br>
