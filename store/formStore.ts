@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'; // Importing necessary functions from Redux Toolkit
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'; // Importing necessary functions from Redux Toolkit
 
 // Define the structure of your form state
 export interface FormValues {
