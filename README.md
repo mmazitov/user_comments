@@ -1,98 +1,58 @@
 <div align="center" id="top"> 
   <img src="./.github/app.gif" alt="User_comments" />
 
-  &#xa0;
+&#xa0;
 
   <!-- <a href="https://user_comments.netlify.app">Demo</a> -->
 </div>
 
-<h1 align="center">User_comments</h1>
-
-<p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/{{YOUR_GITHUB_USERNAME}}/user_comments?color=56BEB8">
-
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/{{YOUR_GITHUB_USERNAME}}/user_comments?color=56BEB8">
-
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{YOUR_GITHUB_USERNAME}}/user_comments?color=56BEB8">
-
-  <img alt="License" src="https://img.shields.io/github/license/{{YOUR_GITHUB_USERNAME}}/user_comments?color=56BEB8">
-
-  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/user_comments?color=56BEB8" /> -->
-
-  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/{{YOUR_GITHUB_USERNAME}}/user_comments?color=56BEB8" /> -->
-
-  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/{{YOUR_GITHUB_USERNAME}}/user_comments?color=56BEB8" /> -->
-</p>
-
-<!-- Status -->
-
-<!-- <h4 align="center"> 
-	🚧  User_comments 🚀 Under construction...  🚧
-</h4> 
-
-<hr> -->
-
-<p align="center">
-  <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
-  <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
-  <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
-  <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
-  <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
-</p>
-
+<h1 align="center">Comments Management Application</h1>
 <br>
 
-## :dart: About ##
+## :dart: About
 
-Describe your project
+<h2>Project Overview</h2>
+<p>This is a comments management application built with React and Redux, designed to facilitate the addition, deletion, and filtering of comments. The application maintains the state of comments and form inputs using Redux Toolkit, and persists data in localStorage to ensure user data is retained across sessions.</p>
+## :sparkles: Features
 
-## :sparkles: Features ##
+:heavy_check_mark: <strong>Add Comments: </strong>Users can submit new comments, which are added to the list and displayed in real time.
+:heavy_check_mark: <strong>Delete Comments: </strong>Users can remove comments from the list with a single click.
+:heavy_check_mark: <strong>Like Comments: </strong>Each comment has a like button, allowing users to increment the like count for their favorite comments.
+:heavy_check_mark: <strong>Filter Comments: </strong>Users can filter comments based on usernames to view specific user contributions.
+:heavy_check_mark: <strong>Form Management: </strong>A form component manages user input for comments and includes a search feature for finding specific comments.
+:heavy_check_mark: <strong>Persistent Storage: </strong>Comments and form input values are saved to localStorage, ensuring data is not lost on page refresh.
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+## :rocket: Technologies
 
-## :rocket: Technologies ##
+<strong>React: </strong> A JavaScript library for building user interfaces.
+<strong>Redux Toolkit: </strong> A modern state management library for React applications.
+<strong>TypeScript: </strong> A strongly typed programming language that builds on JavaScript, providing better tooling at any scale.
+<strong>Tailwind CSS: </strong> A utility-first CSS framework for designing custom user interfaces quickly.
+<strong>ShadCN</strong>: A component library for building modern user interfaces with React.
+<strong>Vite: </strong> A fast build tool and development server for modern web projects.
 
-The following tools were used in this project:
-
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-
-## :white_check_mark: Requirements ##
+## :white_check_mark: Requirements
 
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
-## :checkered_flag: Starting ##
+## :checkered_flag: Starting
 
 ```bash
 # Clone this project
-$ git clone https://github.com/{{YOUR_GITHUB_USERNAME}}/user_comments
+$ git clone https://github.com/mmazitov/user_comments.git
 
-# Access
+# Navigate to the project directory:
 $ cd user_comments
 
-# Install dependencies
-$ yarn
+# Install dependencies:
+$ npm install
 
-# Run the project
-$ yarn start
+# Start the development server:
+$ npm run dev
 
-# The server will initialize in the <http://localhost:3000>
+# Open your browser and visit http://localhost:3000 to see the application in action.
 ```
 
-## :memo: License ##
+## **🤝** Contributing
 
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
-
-
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
-
-&#xa0;
-
-<a href="#top">Back to top</a>
+Contributions are welcome! Please feel free to submit a pull request or open an issue if you encounter any bugs or have feature requests.
